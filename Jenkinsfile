@@ -11,7 +11,9 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 sh '''
-                    echo "=== Installing Dependencies ==="
+                    echo "====================================="
+                    echo "Installing Dependencies..."
+                    echo "====================================="
                     python3 -m pip install --upgrade pip
                     python3 -m pip install -r requirements.txt
                     python3 -m pip install pytest selenium webdriver-manager
@@ -22,7 +24,9 @@ pipeline {
         stage('Run Selenium Tests') {
             steps {
                 sh '''
-                    echo "=== Running Selenium Tests ==="
+                    echo "====================================="
+                    echo "Running Selenium Tests..."
+                    echo "====================================="
                     python3 -m pytest tests/test_login.py -v --tb=short
                 '''
             }
@@ -31,8 +35,9 @@ pipeline {
     
     post {
         always {
-            echo "=== Pipeline Finished ==="
-            echo "Build Result: ${currentBuild.currentResult}"
+            echo "====================================="
+            echo "PIPELINE FINISHED - RESULT: ${currentBuild.currentResult}"
+            echo "====================================="
         }
     }
 }
